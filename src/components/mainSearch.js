@@ -1,5 +1,5 @@
 import React from "react";
-import { FcInfo } from "react-icons/fc";
+import { VscInfo } from "react-icons/vsc";
 import AlertMsg from "./alertMsg";
 
 const row = {
@@ -124,7 +124,7 @@ export default class BetterSearch extends React.Component {
             value={this.state.query}
           ></input>
           <abbr style={{ marginLeft: "5px" }} title={DEFINATIONS.MAIN_QUERY}>
-            <FcInfo fontSize="20px" onClick={() => this.showModal("query")} />
+            <VscInfo fontSize="20px" onClick={() => this.showModal("query")} />
             <AlertMsg
               show={showPopUp.query}
               msg={DEFINATIONS.MAIN_QUERY}
@@ -141,7 +141,10 @@ export default class BetterSearch extends React.Component {
             value={this.state.exclude}
           ></input>
           <abbr style={{ marginLeft: "5px" }} title={DEFINATIONS.EXCLUDE}>
-            <FcInfo fontSize="20px" onClick={() => this.showModal("exclude")} />
+            <VscInfo
+              fontSize="20px"
+              onClick={() => this.showModal("exclude")}
+            />
             <AlertMsg
               modalName="excludeModal"
               show={showPopUp.exclude}
@@ -159,7 +162,7 @@ export default class BetterSearch extends React.Component {
             value={this.state.site}
           ></input>
           <abbr style={{ marginLeft: "5px" }} title={DEFINATIONS.SITE}>
-            <FcInfo fontSize="20px" onClick={() => this.showModal("site")} />
+            <VscInfo fontSize="20px" onClick={() => this.showModal("site")} />
             <AlertMsg
               modalName="siteModal"
               show={showPopUp.site}
@@ -188,7 +191,7 @@ export default class BetterSearch extends React.Component {
             value={this.state.after}
           ></input>
           <abbr style={{ marginLeft: "5px" }} title={DEFINATIONS.YEAR}>
-            <FcInfo fontSize="20px" onClick={() => this.showModal("year")} />
+            <VscInfo fontSize="20px" onClick={() => this.showModal("year")} />
             <AlertMsg
               modalName="yearModal"
               show={showPopUp.year}
@@ -206,7 +209,7 @@ export default class BetterSearch extends React.Component {
             value={this.state.exact}
           ></input>
           <abbr style={{ marginLeft: "5px" }} title={DEFINATIONS.EXACT}>
-            <FcInfo fontSize="20px" onClick={() => this.showModal("exact")} />
+            <VscInfo fontSize="20px" onClick={() => this.showModal("exact")} />
             <AlertMsg
               modalName="exactModal"
               show={showPopUp.exact}
