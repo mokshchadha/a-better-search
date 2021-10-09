@@ -1,5 +1,6 @@
 import React from "react";
 import { FcInfo } from "react-icons/fc";
+import AlertMsg from "./alertMsg";
 
 const row = {
   fontSize: "12px",
@@ -44,8 +45,14 @@ export default class BetterSearch extends React.Component {
     exclude: "",
     before: "",
     after: "",
-    modalMessage: "",
-    showPopUp: false,
+
+    showPopUp: {
+      query: false,
+      exact: false,
+      site: false,
+      exclude: false,
+      year: false,
+    },
   };
 
   state = this.defaultState;
@@ -96,7 +103,16 @@ export default class BetterSearch extends React.Component {
     this.setState(this.defaultState);
   }
 
+  closeModal(type) {
+    this.setState({ showPopUp: { ...this.state.showPopUp, [type]: false } });
+  }
+
+  showModal(type) {
+    this.setState({ showPopUp: { ...this.state.showPopUp, [type]: true } });
+  }
+
   render() {
+    const { showPopUp } = this.state;
     return (
       <div style={column}>
         <div style={row}>
@@ -108,7 +124,12 @@ export default class BetterSearch extends React.Component {
             value={this.state.query}
           ></input>
           <abbr style={{ marginLeft: "5px" }} title={DEFINATIONS.MAIN_QUERY}>
-            <FcInfo fontSize="20px" />
+            <FcInfo fontSize="20px" onClick={() => this.showModal("query")} />
+            <AlertMsg
+              show={showPopUp.query}
+              msg={DEFINATIONS.MAIN_QUERY}
+              onClose={() => this.closeModal("query")}
+            />
           </abbr>
         </div>
         <div style={row}>
@@ -120,7 +141,13 @@ export default class BetterSearch extends React.Component {
             value={this.state.exclude}
           ></input>
           <abbr style={{ marginLeft: "5px" }} title={DEFINATIONS.EXCLUDE}>
-            <FcInfo fontSize="20px" />
+            <FcInfo fontSize="20px" onClick={() => this.showModal("exclude")} />
+            <AlertMsg
+              modalName="excludeModal"
+              show={showPopUp.exclude}
+              msg={DEFINATIONS.EXCLUDE}
+              onClose={() => this.closeModal("exclude")}
+            />
           </abbr>
         </div>
         <div style={row}>
@@ -132,7 +159,13 @@ export default class BetterSearch extends React.Component {
             value={this.state.site}
           ></input>
           <abbr style={{ marginLeft: "5px" }} title={DEFINATIONS.SITE}>
-            <FcInfo fontSize="20px" />
+            <FcInfo fontSize="20px" onClick={() => this.showModal("site")} />
+            <AlertMsg
+              modalName="siteModal"
+              show={showPopUp.site}
+              msg={DEFINATIONS.SITE}
+              onClose={() => this.closeModal("site")}
+            />
           </abbr>
         </div>
         <div style={row}>
@@ -155,7 +188,13 @@ export default class BetterSearch extends React.Component {
             value={this.state.after}
           ></input>
           <abbr style={{ marginLeft: "5px" }} title={DEFINATIONS.YEAR}>
-            <FcInfo fontSize="20px" />
+            <FcInfo fontSize="20px" onClick={() => this.showModal("year")} />
+            <AlertMsg
+              modalName="yearModal"
+              show={showPopUp.year}
+              msg={DEFINATIONS.YEAR}
+              onClose={() => this.closeModal("year")}
+            />
           </abbr>
         </div>
         <div style={row}>
@@ -167,7 +206,13 @@ export default class BetterSearch extends React.Component {
             value={this.state.exact}
           ></input>
           <abbr style={{ marginLeft: "5px" }} title={DEFINATIONS.EXACT}>
-            <FcInfo fontSize="20px" />
+            <FcInfo fontSize="20px" onClick={() => this.showModal("exact")} />
+            <AlertMsg
+              modalName="exactModal"
+              show={showPopUp.exact}
+              msg={DEFINATIONS.EXACT}
+              onClose={() => this.closeModal("exact")}
+            />
           </abbr>
         </div>
         <div style={{ ...row, justifyContent: "center" }}>

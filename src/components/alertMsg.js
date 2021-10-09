@@ -1,30 +1,40 @@
 import React, { useEffect, useState } from "react";
 
-const Alert = ({ msg, show }) => {
+const Alert = ({
+  msg,
+  show,
+  onShow = () => {},
+  onClose = () => {},
+  modalName = "myModal",
+}) => {
   const [showModal, setShow] = useState(false);
+  const [message, setMessage] = useState(msg);
 
   useEffect(() => {
-    const modal = document.getElementById("myModal");
+    onShow();
+    const modal = document.getElementById(modalName);
     setShow(show);
+    setMessage(msg);
+
     modal.style.display = showModal ? "block" : "none";
-  });
+  }, [show, showModal, onShow, msg, modalName]);
 
   return (
     <div>
-      <div id="myModal" className="modal">
+      <div id={modalName} className="modal">
         <div className="modal-content">
           <span
             className="close"
             onClick={() => {
-              console.log(msg);
-              const modal = document.getElementById("myModal");
+              const modal = document.getElementById(modalName);
               setShow(false);
               modal.style.display = "none";
+              onClose();
             }}
           >
             &times;
           </span>
-          <p>The message is {msg}</p>
+          <p style={{ color: "white" }}>{message}</p>
         </div>
       </div>
     </div>
