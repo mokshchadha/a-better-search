@@ -1,6 +1,5 @@
 import React from "react";
 import { FcInfo } from "react-icons/fc";
-import AlertModal from "./alertMsg";
 
 const row = {
   fontSize: "12px",
@@ -38,7 +37,7 @@ const DEFINATIONS = {
 };
 
 export default class BetterSearch extends React.Component {
-  state = {
+  defaultState = {
     query: "",
     exact: false,
     site: "",
@@ -48,6 +47,8 @@ export default class BetterSearch extends React.Component {
     modalMessage: "",
     showPopUp: false,
   };
+
+  state = this.defaultState;
 
   validateInput() {
     const { query, before, after } = this.state;
@@ -89,6 +90,10 @@ export default class BetterSearch extends React.Component {
       url +
       [beforeQ, afterQ, textQ, excludeQ, siteQ].filter((e) => e).join("+");
     window.open(search);
+  }
+
+  handleClear() {
+    this.setState(this.defaultState);
   }
 
   render() {
@@ -168,6 +173,9 @@ export default class BetterSearch extends React.Component {
         <div style={{ ...row, justifyContent: "center" }}>
           <button className="searchBtn" onClick={() => this.handleSearch()}>
             Search
+          </button>
+          <button className="clearBtn" onClick={() => this.handleClear()}>
+            Clear All
           </button>
         </div>
       </div>
